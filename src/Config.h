@@ -19,7 +19,7 @@ public:
 
 	static constexpr float ENERGY_LOSS = 0.85f;
 	
-	static constexpr float g = -9.8f;
+	static float g;
 	static constexpr float BULLET_SPEED = 3.0f;
 	
 	static constexpr float METERS_TO_PIXELS = 3;

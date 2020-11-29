@@ -183,15 +183,21 @@ void Game::quit()
 
 void Game::render() const
 {
+	SDL_SetRenderDrawColor(Renderer::Instance()->getRenderer(), 255, 255, 255, 255);
 	SDL_RenderClear(Renderer::Instance()->getRenderer()); // clear the renderer to the draw colour
-
+	
+	
+	
 	m_currentScene->draw();
-
+	ImGui::Render();
+	ImGuiSDL::Render(ImGui::GetDrawData());
 	SDL_RenderPresent(Renderer::Instance()->getRenderer()); // draw to the screen
 }
 
 void Game::update() const
 {
+	ImGui::NewFrame();
+	
 	m_currentScene->update();
 }
 
@@ -210,4 +216,12 @@ void Game::clean() const
 void Game::handleEvents()
 {
 	m_currentScene->handleEvents();
+	
+	ImGuiIO& io = ImGui::GetIO();
+	int mouseX, mouseY;
+	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+	io.MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
+	io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+	io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+	io.MouseWheel = static_cast<float>(EventManager::Instance().getMouseWheel());
 }

@@ -61,17 +61,17 @@ void StartScene::handleEvents()
 void StartScene::start()
 {
 	const SDL_Color blue = { 0, 0, 255, 255 };
-	m_pNameLabel = new Label("DOBRIVSKIY MAXIM", "Dock51", 80, blue, glm::vec2(500.0f, 40.0f));
+	m_pNameLabel = new Label("DOBRIVSKIY MAXIM", "Dock51", 80, blue, glm::vec2(Config::SCREEN_WIDTH/2, 40.0f));
 	m_pNameLabel->setParent(this);
 	addChild(m_pNameLabel);
 
-	m_pStudentNumLabel = new Label("101290100", "Dock51", 40, { 0, 0, 150, 255 }, glm::vec2(500.0f, 120.0f));
+	m_pStudentNumLabel = new Label("101290100", "Dock51", 40, { 0, 0, 150, 255 }, glm::vec2(Config::SCREEN_WIDTH / 2, 120.0f));
 	m_pStudentNumLabel->setParent(this);
 	addChild(m_pStudentNumLabel);
 
 	// Start Button
 	m_pStartButton = new Button();// "../Assets/textures/PlayB.png");
-	m_pStartButton->getTransform()->position = glm::vec2(500.0f, 400.0f);
+	m_pStartButton->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH / 2, 400.0f);
 	m_pStartButton->getTransform()->rotation = glm::vec2(0.0f, 0.0f);
 	
 	m_pStartButton->addEventListener(CLICK, [&]()-> void

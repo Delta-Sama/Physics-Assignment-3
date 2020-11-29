@@ -5,7 +5,7 @@ const int X_SIZE = Config::SCREEN_WIDTH;
 const int Y_SIZE = Config::SCREEN_HEIGHT;
 
 Background::Background() {
-	TextureManager::Instance()->load("../Assets/textures/PhysicsBackground.png", "PhysicsBackground");
+	TextureManager::Instance()->load("../Assets/textures/Background.jpg", "Background");
 
 	setWidth(X_SIZE);
 	setHeight(Y_SIZE);
@@ -25,7 +25,7 @@ void Background::draw() {
 	const auto y = getTransform()->position.y;
 	const auto ang = getTransform()->rotation.x;
 
-	TextureManager::Instance()->draw("PhysicsBackground", x, y, ang, 255, false, SDL_FLIP_NONE, { getWidth(),getHeight() });
+	TextureManager::Instance()->draw("Background", x, y, ang, 255, false, SDL_FLIP_NONE, { getWidth(),getHeight() });
 }
 
 void Background::update() {

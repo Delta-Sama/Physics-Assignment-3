@@ -13,8 +13,8 @@ BouncingBall::BouncingBall(glm::vec2 pos)
 	TextureManager::Instance()->load("../Assets/textures/BasketballBallShadow.png", "ball_shadow");
 	TextureManager::Instance()->load("../Assets/textures/BasketballBoxShadow.png", "box_shadow");
 	
-	setWidth(40);
-	setHeight(40);
+	setWidth(50);
+	setHeight(50);
 
 	getRigidBody()->elasticity = 0.85f;
 	getRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);

@@ -9,9 +9,6 @@
 #include "IMGUI/imgui.h"
 #include "IMGUI_SDL/imgui_sdl.h"
 
-const int FPS = 60;
-const int DELAY_TIME = 1000.0f / FPS;
-
 int main(int argc, char * args[])
 {
 	Uint32 frameStart, frameTime;
@@ -27,15 +24,20 @@ int main(int argc, char * args[])
 
 	TheGame::Instance()->init("SDLEngine 0.24", 100, 100, Config::SCREEN_WIDTH, Config::SCREEN_HEIGHT, false);
 
+	ImGuiIO& io = ImGui::GetIO();
+	io.DeltaTime = 1.0f / Config::FPS;
+	
 	while (TheGame::Instance()->isRunning())
 	{
 		frameStart = SDL_GetTicks();
-
+		
 		TheGame::Instance()->handleEvents();
 		TheGame::Instance()->update();
 		TheGame::Instance()->render();
 
 		frameTime = SDL_GetTicks() - frameStart;
+
+		const float DELAY_TIME = 1000.0f / Config::FPS;
 		if (frameTime< DELAY_TIME)
 		{
 			SDL_Delay(int(DELAY_TIME - frameTime));

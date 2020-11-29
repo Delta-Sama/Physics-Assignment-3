@@ -2,6 +2,7 @@
 #ifndef __PLAY_SCENE_2__
 #define __PLAY_SCENE_2__
 
+#include "Background.h"
 #include "BouncingBall.h"
 #include "Bullet.h"
 #include "Crate.h"
@@ -23,6 +24,9 @@ public:
 private:
 	BouncingBall* m_ball;
 	Crate* m_crate;
+	Background* m_background;
+	
+	bool lowFPS = false;
 
 };
 

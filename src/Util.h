@@ -29,7 +29,8 @@ class Util
 public:
 	Util();
 	~Util();
-
+	static bool debugMode;
+	
 	static void DrawQueue();
 	
 	static const float EPSILON;

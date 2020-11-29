@@ -10,6 +10,7 @@ std::vector<Circle> Util::m_circles;
 const float Util::EPSILON = glm::epsilon<float>();
 const float Util::Deg2Rad = glm::pi<float>() / 180.0f;
 const float Util::Rad2Deg = 180.0f / glm::pi<float>();
+bool Util::debugMode = false;
 
 Util::Util()
 = default;
@@ -303,6 +304,8 @@ float Util::signedAngle(const glm::vec2 from, const glm::vec2 to)
 
 void Util::DrawLine(glm::vec2 start, glm::vec2 end, glm::vec4 colour)
 {
+	if (!debugMode) return;
+
 	int r = floor(colour.r * 255.0f);
 	int g = floor(colour.g * 255.0f);
 	int b = floor(colour.b * 255.0f);
@@ -317,6 +320,8 @@ void Util::DrawLine(glm::vec2 start, glm::vec2 end, glm::vec4 colour)
 
 void Util::DrawRect(glm::vec2 position, int width, int height, glm::vec4 colour)
 {
+	if (!debugMode) return;
+
 	int r = floor(colour.r * 255.0f);
 	int g = floor(colour.g * 255.0f);
 	int b = floor(colour.b * 255.0f);
@@ -337,6 +342,8 @@ void Util::DrawRect(glm::vec2 position, int width, int height, glm::vec4 colour)
 
 void Util::DrawCircle(glm::vec2 centre, int radius, glm::vec4 colour, ShapeType type)
 {
+	if (!debugMode) return;
+	
 	int r = floor(colour.r * 255.0f);
 	int g = floor(colour.g * 255.0f);
 	int b = floor(colour.b * 255.0f);
@@ -419,6 +426,8 @@ void Util::DrawCircle(glm::vec2 centre, int radius, glm::vec4 colour, ShapeType 
 
 void Util::DrawCapsule(glm::vec2 position, int width, int height, glm::vec4 colour)
 {
+	if (!debugMode) return;
+
 	int diameter;
 	int radius;
 	int halfWidth = floor(width * 0.5f);
