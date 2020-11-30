@@ -5,6 +5,7 @@
 #include "Background.h"
 #include "BouncingBall.h"
 #include "Bullet.h"
+#include "Button.h"
 #include "Crate.h"
 #include "Scene.h"
 #include "ship.h"
@@ -25,6 +26,7 @@ private:
 	BouncingBall* m_ball;
 	Crate* m_crate;
 	Background* m_background;
+	Button* m_pMenuButton;
 	
 	bool lowFPS = false;
 

@@ -34,9 +34,9 @@ void Button::draw()
 	const auto x = getTransform()->position.x;
 	const auto ang = getTransform()->rotation.x;
 	const auto y = getTransform()->position.y;
-
+	
 	// draw the button
-	TextureManager::Instance()->draw(m_name, x, y, ang, m_alpha, m_isCentered);
+	TextureManager::Instance()->draw(m_name, x, y, ang, m_alpha, m_isCentered, SDL_FLIP_NONE, { getWidth(),getHeight() });
 }
 
 void Button::update()

@@ -29,7 +29,7 @@ void StartScene::update()
 		m_pStartButton->getTransform()->position.y += 14.0f;
 	}
 	else if (cur_frame == 0) {
-		TheGame::Instance()->changeSceneState(PLAY2_SCENE);
+		TheGame::Instance()->changeSceneState(PLAY1_SCENE);
 	}
 }
 

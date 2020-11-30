@@ -16,7 +16,7 @@ const float TURN_SPEED = 4.0f;
 
 Ship::Ship()
 {
-	TextureManager::Instance()->load("../Assets/textures/ship3.png","ship");
+	TextureManager::Instance()->load("../Assets/textures/ship.png","ship");
 
 	auto size = TextureManager::Instance()->getTextureSize("ship");
 	setWidth(size.x);
@@ -43,7 +43,7 @@ void Ship::draw()
 	const auto y = getTransform()->position.y;
 
 	// draw the ship
-	TextureManager::Instance()->draw("ship", x, y, m_currentHeading, 255, true);
+	TextureManager::Instance()->draw("ship", x, y, m_currentHeading, 255, true, SDL_FLIP_NONE, {getWidth(),getHeight()});
 }
 
 
@@ -60,7 +60,7 @@ void Ship::update()
 		const float x = cos(angle) * MOVE_SPEED * Config::METERS_TO_PIXELS;
 		const float y = sin(angle) * MOVE_SPEED * Config::METERS_TO_PIXELS;
 
-		m_currentHeading = MAMA::To180Deg(MAMA::RadToDeg(angle));
+		m_currentHeading = MAMA::To180Deg(MAMA::RadToDeg(angle)) + 90.0f;
 		
 		getTransform()->position += glm::vec2(x,y);
 	}

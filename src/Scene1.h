@@ -2,7 +2,9 @@
 #ifndef __PLAY_SCENE__
 #define __PLAY_SCENE__
 
+#include "Background.h"
 #include "Bullet.h"
+#include "Button.h"
 #include "Scene.h"
 #include "ObjectPoolManager.h"
 #include "ObjectPoolManager.cpp"
@@ -24,6 +26,10 @@ private:
 	ObjectPool<Bullet>* m_pool;
 	Ship* m_ship;
 	int m_add_cooldown;
+
+	Button* m_pNextButton;
+	Button* m_pMenuButton;
+	Background* m_pbackground;
 	
 };
 

@@ -53,8 +53,11 @@ void ObjectPool<T>::Clean()
 {
 	for (int i = 0; i < m_size; i++)
 	{
-		delete pool[i].object;
-		pool[i].object = nullptr;
+		if (pool[i].object != nullptr)
+		{
+			delete pool[i].object;
+			pool[i].object = nullptr;
+		}
 	}
 }
 
@@ -68,7 +71,7 @@ void ObjectPool<T>::UnbindUsage(PoolObject<T>* object)
 template <class T>
 T* ObjectPool<T>::GetFreeObject()
 {
-	if (!free_objects.empty())
+	if (!free_objects.empty() && free_objects.back())
 	{
 		PoolObject<T>* temp = free_objects.back();
 		temp->inUse = true;
@@ -78,7 +81,7 @@ T* ObjectPool<T>::GetFreeObject()
 	}
 	else
 	{
-		std::cout << "Its empty\n";
+		std::cout << "The list is empty\n";
 	}
 
 	return nullptr;

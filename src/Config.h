@@ -11,7 +11,8 @@ public:
 	static const int SCREEN_WIDTH = 1000;
 	static const int SCREEN_HEIGHT = 600;
 	static float FPS;
-
+	static bool MOUSE_CONTROL;
+	
 	static const int BOTTOM_BORDER = SCREEN_HEIGHT * 0.95;
 
 	static constexpr float MAX_ROTATION = 12.0f;

@@ -7,13 +7,16 @@
 class Background : public Sprite
 {
 public:
-	Background();
+	Background(const std::string& image_path = "../Assets/textures/Background.jpg");
 	~Background();
 
 	// Life Cycle Methods
 	virtual void draw() override;
 	virtual void update() override;
 	virtual void clean() override;
+
+private:
+	std::string key;
 };
 
 #endif

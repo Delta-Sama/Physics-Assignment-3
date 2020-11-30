@@ -30,11 +30,16 @@ public:
 	void updateDisplayList();
 	void drawDisplayList();
 
+	void setActive(bool mode) { active = mode; }
+
 private:
 	uint32_t m_nextLayerIndex = 0;
 	std::vector<DisplayObject*> m_displayList;
 
 	static bool sortObjects(DisplayObject* left, DisplayObject* right);
+	
+protected:
+	bool active;
 };
 
 #endif /* defined (__SCENE__) */

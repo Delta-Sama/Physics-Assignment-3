@@ -4,8 +4,7 @@
 
 #include "DisplayObject.h"
 
-Scene::Scene()
-= default;
+Scene::Scene() : active(true) {};
 
 Scene::~Scene()
 {

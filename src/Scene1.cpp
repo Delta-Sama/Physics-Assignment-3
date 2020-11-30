@@ -26,18 +26,68 @@ void Scene1::start()
 {
 	m_pool = new ObjectPool<Bullet> (Config::NUMBER_OF_BULLETS, BulletTest);
 
+	m_pbackground = new Background("../Assets/textures/CosmoBackground.jpg");
+	addChild(m_pbackground);
+	
 	m_ship = new Ship;
+	m_ship->setWidth(50.0f);
+	m_ship->setHeight(50.0f);
 	addChild(m_ship);
 	m_ship->getTransform()->position = EventManager::Instance().getMousePosition();
-
+	
 	SoundManager::Instance().setSoundVolume(5);
 	SoundManager::Instance().load("../Assets/audio/yay.ogg", "explosion", SoundType::SOUND_SFX);
+
+	m_pNextButton = new Button("../Assets/textures/nextButton.png","NextB");
+	m_pNextButton->setWidth(110.0f);
+	m_pNextButton->setHeight(40.0f);
+	m_pNextButton->getTransform()->position = glm::vec2(Config::SCREEN_WIDTH - 70.0f, Config::SCREEN_HEIGHT - 40.0f);
+	addChild(m_pNextButton);
+
+	m_pNextButton->addEventListener(MOUSE_OVER, [&]()->void
+		{
+			m_pNextButton->setAlpha(220);
+			m_pNextButton->getTransform()->rotation.x = -10.0f;
+		});
+	m_pNextButton->addEventListener(MOUSE_OUT, [&]()->void
+		{
+			m_pNextButton->setAlpha(255);
+			m_pNextButton->getTransform()->rotation.x = 0.0f;
+		});
+	m_pNextButton->addEventListener(CLICK, [&]()-> void
+		{
+			TheGame::Instance()->changeSceneState(PLAY2_SCENE);
+		});
+
+	m_pMenuButton = new Button("../Assets/textures/menuButton.png","MenuB");
+	m_pMenuButton->setWidth(110.0f);
+	m_pMenuButton->setHeight(40.0f);
+	m_pMenuButton->getTransform()->position = glm::vec2(70.0f, Config::SCREEN_HEIGHT - 40.0f);
+	addChild(m_pMenuButton);
+
+	m_pMenuButton->addEventListener(MOUSE_OVER, [&]()->void
+		{
+			m_pMenuButton->setAlpha(220);
+			m_pMenuButton->getTransform()->rotation.x = 10.0f;
+		});
+	m_pMenuButton->addEventListener(MOUSE_OUT, [&]()->void
+		{
+			m_pMenuButton->setAlpha(255);
+			m_pMenuButton->getTransform()->rotation.x = 0.0f;
+		});
+	m_pMenuButton->addEventListener(CLICK, [&]()-> void
+		{
+			TheGame::Instance()->changeSceneState(START_SCENE);
+		});
 }
 
 void Scene1::update()
 {
+	if (!active) return;
+	
 	updateDisplayList();
-
+	
+	if (!active) return;
 	m_pool->Update();
 	
 	if (m_add_cooldown-- <= 0)
@@ -68,6 +118,8 @@ void Scene1::update()
 
 void Scene1::handleEvents()
 {
+	if (!active) return;
+	
 	EventManager::Instance().update();
 
 	//if (EventManager::Instance().isKeyDown(SDL_SCANCODE_A))
@@ -82,6 +134,8 @@ void Scene1::handleEvents()
 
 void Scene1::draw()
 {
+	if (!active) return;
+	
 	drawDisplayList();
 
 	m_pool->Draw();

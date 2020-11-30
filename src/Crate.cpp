@@ -30,7 +30,7 @@ void Crate::update()
 	getRigidBody()->velocity.y += -Config::g / 60.0f;
 	//getRigidBody()->velocity = { 0,0 };
 	
-	if (EventManager::Instance().getMouseButton(0))
+	if (EventManager::Instance().getMouseButton(0) && Config::MOUSE_CONTROL)
 	{
 		glm::vec2 m = EventManager::Instance().getMousePosition();
 		glm::vec2 direction = m - getTransform()->position;

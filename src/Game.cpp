@@ -136,6 +136,7 @@ void Game::changeSceneState(const SceneState new_state)
 		// scene clean up
 		if (m_currentSceneState != NO_SCENE) 
 		{
+			m_currentScene->setActive(false);
 			m_currentScene->clean();
 			std::cout << "cleaning previous scene" << std::endl;
 			FontManager::Instance()->clean();
@@ -186,11 +187,11 @@ void Game::render() const
 	SDL_SetRenderDrawColor(Renderer::Instance()->getRenderer(), 255, 255, 255, 255);
 	SDL_RenderClear(Renderer::Instance()->getRenderer()); // clear the renderer to the draw colour
 	
-	
-	
 	m_currentScene->draw();
+	
 	ImGui::Render();
 	ImGuiSDL::Render(ImGui::GetDrawData());
+	
 	SDL_RenderPresent(Renderer::Instance()->getRenderer()); // draw to the screen
 }
 
