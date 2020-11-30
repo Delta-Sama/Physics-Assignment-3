@@ -30,7 +30,6 @@ float PhysicsManager::CheckWorldCollision(GameObject& obj)
 			GameObject* B = *it;
 			
 			static glm::vec2 last_normal = {0.0f,0.0f};
-			static glm::vec2 last_impulse = { 0.0f,0.0f };
 			
 			Manifold result = ADCOMA::SweptAABB(&obj, *it);
 
@@ -72,12 +71,21 @@ float PhysicsManager::CheckWorldCollision(GameObject& obj)
 			if (result.result)
 			{
 				last_normal = result.normal;
-				A->getRigidBody()->velocity.x *= A->getRigidBody()->elasticity;
-				A->getRigidBody()->velocity.y *= A->getRigidBody()->elasticity;
+				bool x_opposite_vel = (A->getRigidBody()->velocity.x > 0 && B->getRigidBody()->velocity.x < 0 ||
+					A->getRigidBody()->velocity.x < 0 && B->getRigidBody()->velocity.x > 0);
 
-				B->getRigidBody()->velocity.x *= B->getRigidBody()->elasticity;
-				B->getRigidBody()->velocity.y *= B->getRigidBody()->elasticity;
+				bool y_opposite_vel = (A->getRigidBody()->velocity.y > 0 && B->getRigidBody()->velocity.y < 0 ||
+					A->getRigidBody()->velocity.y < 0 && B->getRigidBody()->velocity.y > 0);
 
+				if (x_opposite_vel) {
+					A->getRigidBody()->velocity.x *= A->getRigidBody()->elasticity;
+					B->getRigidBody()->velocity.x *= B->getRigidBody()->elasticity;
+				}
+
+				if (y_opposite_vel) {
+					A->getRigidBody()->velocity.y *= A->getRigidBody()->elasticity;
+					B->getRigidBody()->velocity.y *= B->getRigidBody()->elasticity;
+				}
 			}
 
 			Util::QueueCircle({ 800.0f,350.0f }, 2, { 0,0,1,1 });

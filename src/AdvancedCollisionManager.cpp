@@ -63,6 +63,21 @@ Manifold AdvancedCollisionManager::SweptAABB(GameObject* obj)
 
 	const float entryTime = std::min(xEntryTime, yEntryTime);
 
+	const int k = 1;
+	if (obj->getTransform()->position.x - obj->getWidth() / 2 < -k) {
+		obj->getTransform()->position.x = obj->getWidth() / 2 + 1;
+		
+	}
+	if (obj->getTransform()->position.x + obj->getWidth() / 2 > Config::SCREEN_WIDTH + k) {
+		obj->getTransform()->position.x = Config::SCREEN_WIDTH - obj->getWidth() / 2 - 1;
+	}
+	if (obj->getTransform()->position.y - obj->getHeight() / 2 < k) {
+		obj->getTransform()->position.y = obj->getHeight() / 2 + 1;
+	}
+	if (obj->getTransform()->position.y + obj->getHeight() / 2 > Config::BOTTOM_BORDER + k) {
+		obj->getTransform()->position.y = Config::BOTTOM_BORDER - obj->getHeight() / 2 - 1;
+	}
+	
 	// No collision case
 	if (xEntryTime < 0.0f && yEntryTime < 0.0f || xEntryTime > 1.0f && yEntryTime > 1.0f)
 	{
@@ -112,16 +127,6 @@ Manifold AdvancedCollisionManager::SweptAABB(GameObject* obj)
 	{
 		obj->getRigidBody()->velocity.y = -obj->getRigidBody()->velocity.y;
 	}
-
-	/*const int k = 2;
-	if (obj->getTransform()->position.x - obj->getWidth() / 2 - k < 0)
-		obj->getTransform()->position.x = obj->getWidth() / 2 + 1;
-	if (obj->getTransform()->position.x + obj->getWidth() / 2 + k > Config::SCREEN_WIDTH)
-		obj->getTransform()->position.x = Config::SCREEN_WIDTH - obj->getWidth() / 2 - 1;
-	if (obj->getTransform()->position.y - obj->getHeight() / 2 - k < 0)
-		obj->getTransform()->position.y = obj->getHeight() / 2 + 1;
-	if (obj->getTransform()->position.y + obj->getHeight() / 2 + k > Config::BOTTOM_BORDER)
-		obj->getTransform()->position.y = Config::BOTTOM_BORDER - obj->getHeight() / 2 - 1;*/
 	
 	return result;
 }
@@ -200,7 +205,7 @@ Manifold AdvancedCollisionManager::SweptRectRect(GameObject* obj1, GameObject* o
 		float velsum = abs(obj1->getRigidBody()->velocity.x) + abs(obj2->getRigidBody()->velocity.x);
 		float propK1 = abs(obj1->getRigidBody()->velocity.x) / velsum;
 		float propK2 = abs(obj2->getRigidBody()->velocity.x) / velsum;
-		
+
 		diffMove1 = { -result.normal.x * (difX + abs(vel1.x) + 0.0f) * propK1, 0.0f };
 		diffMove2 = { result.normal.x * (difX + abs(vel2.x) + 0.0f) * propK2, 0.0f };
 	}
@@ -284,7 +289,7 @@ Manifold AdvancedCollisionManager::SweptCircleRect(GameObject* obj1, GameObject*
 		float velsum = abs(obj1->getRigidBody()->velocity.x) + abs(obj2->getRigidBody()->velocity.x);
 		float propK1 = abs(obj1->getRigidBody()->velocity.x) / velsum;
 		float propK2 = abs(obj2->getRigidBody()->velocity.x) / velsum;
-
+		
 		diffMove1 = { -result.normal.x * (difX + abs(vel1.x) + 0.0f) * propK1, 0.0f };
 		diffMove2 = { result.normal.x * (difX + abs(vel2.x) + 0.0f) * propK2, 0.0f };
 	}
